@@ -1,0 +1,16 @@
+[package]
+name = "dotacat"
+version = "0.3.0"
+authors = ["Stephen <stephen@scd31.com>"]
+description = "Like lolcat, but fast"
+edition = "2024"
+license = "MIT"
+readme = "README.md"
+homepage = "https://git.scd31.com/stephen/dotacat"
+repository = "https://git.scd31.com/stephen/dotacat"
+keywords = ["cli", "rainbow", "cat", "colourful", "colorful"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+rand = "0.7"
+clap = { version = "4.0", features = ["derive", "cargo"] }
