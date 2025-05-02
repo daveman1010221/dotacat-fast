@@ -32,6 +32,10 @@ struct CmdOpts {
     #[arg(short = 'i', long)]
     invert: bool,
 
+    #[arg(short = 't', long)]
+    /// Print elapsed timing to stderr
+    timing: bool,
+
     /// Files to concatenate(`-` for STDIN)
     files: Vec<String>,
 }
@@ -102,6 +106,9 @@ fn main() {
             }
         }
     }
-    let duration = start.elapsed();
-    eprintln!("Elapsed: {duration:.3?}");
+    if opts.timing {
+        let duration = start.elapsed();
+        println!();
+        println!("Elapsed: {duration:.3?}");
+    }
 }
