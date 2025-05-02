@@ -21,7 +21,7 @@
             hash = "sha256-FpCiJ3tzgbgUjwczpRIJ7iJ80p1HyvHtt1g6izcsEoo=";
           };
 
-          cargoHash = "sha256-0000000000000000000000000000000000000000000000000000";
+          cargoHash = pkgs.lib.fakeSha256;
           useFetchCargoVendor = true;
 
           meta = with pkgs.lib; {
