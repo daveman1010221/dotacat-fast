@@ -17,8 +17,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "daveman1010221";
             repo = "dotacat-fast";
-            rev = "b35f15384dd2bbb2e6f9d4638ce9ced7a3336531";
-            hash = "sha256-NPbgp94Dz1BZLI8DEUwSeHMzGV9RprCdWAtHsq5eaLs="; # dummy hash
+            rev = "1eeed96522cf18a1e303aeeeb597e8b943a78b9d";
+            hash = "sha256-DOcLYRY829GoFJqa3fRsGfF9rdRJm6Lx1DVOKjMBQxs="; # dummy hash
           };
 
           cargoHash = "sha256-lX84r7hH5hFPF76ZG/9TSMDAHSSz30B99iOT7sDBXPA="; # dummy hash
