@@ -1,7 +1,10 @@
 [package]
 name = "dotacat"
 version = "0.4.0"
-authors = [ "Stephen <stephen@scd31.com>", "David Shepard <daveman1010220@gmail.com>"]
+authors = [
+    "Stephen <stephen@scd31.com>",
+    "David Shepard <daveman1010220@gmail.com>",
+]
 description = "Like lolcat, but fast"
 edition = "2024"
 license = "MIT"
@@ -12,5 +15,10 @@ keywords = ["cli", "rainbow", "cat", "colourful", "colorful"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-rand = "0.7"
-clap = { version = "4.0", features = ["derive", "cargo"] }
+rand = { version = "0.9", default-features = false, features = ["small_rng"] }
+clap = { version = "4.5", default-features = false, features = [
+    "derive",
+    "help",
+    "std",
+    "usage",
+] }

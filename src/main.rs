@@ -1,6 +1,10 @@
 use clap::Parser;
+use rand::rngs::SmallRng;
+use rand::{Rng, SeedableRng};
 use std::fs::File;
 use std::io::{BufRead, BufReader, stdin};
+use std::time::Instant;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 mod lol;
 
@@ -41,7 +45,13 @@ fn read_line() -> Option<(String, usize)> {
 }
 
 fn main() {
+    let start = Instant::now();
+
     let opts: CmdOpts = CmdOpts::parse();
+
+    let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
+    let seed = now.as_secs() ^ (now.subsec_nanos() as u64); // simple mixing
+    let mut rng = SmallRng::seed_from_u64(seed);
 
     let mut files = opts.files;
     if files.is_empty() {
@@ -50,7 +60,7 @@ fn main() {
 
     let mut seed: f64 = opts.seed;
     if seed.abs() < 0.00001 {
-        seed = rand::random::<f64>() * 1_000_000.0;
+        seed = rng.random_range(0.0..1_000_000.0)
     }
 
     for file_path in files {
@@ -92,4 +102,6 @@ fn main() {
             }
         }
     }
+    let duration = start.elapsed();
+    eprintln!("Elapsed: {duration:.3?}");
 }

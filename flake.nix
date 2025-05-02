@@ -4,7 +4,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -17,11 +17,11 @@
           src = pkgs.fetchFromGitHub {
             owner = "daveman1010221";
             repo = "dotacat-fast";
-            rev = "d24e9a474751e61546144a5a4b34768c368002ef";
-            hash = "sha256-CZu8s+OZON4sXiD/0IqrIBHXhVtfQNQtHPzaqWK5hSg=";
+            rev = "";
+            hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
           };
 
-          cargoHash = "sha256-lX84r7hH5hFPF76ZG/9TSMDAHSSz30B99iOT7sDBXPA=";
+          cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
           useFetchCargoVendor = true;
 
