@@ -68,8 +68,6 @@ pub fn print_rainbow(
             i += 1;
         }
     }
-
-    out.write_all(b"\n")?;
     out.flush()?;
     Ok(())
 }
