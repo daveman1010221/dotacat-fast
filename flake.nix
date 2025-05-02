@@ -18,7 +18,7 @@
             owner = "daveman1010221";
             repo = "dotacat-fast";
             rev = "9abbe953ffdeda582c6b94a42cd60bd698f9c1c7";
-            hash = "sha256-0000000000000000000000000000000000000000000000000000";
+            hash = "sha256-FpCiJ3tzgbgUjwczpRIJ7iJ80p1HyvHtt1g6izcsEoo=";
           };
 
           cargoHash = "sha256-0000000000000000000000000000000000000000000000000000";
