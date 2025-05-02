@@ -11,17 +11,17 @@
         rustPlatform = pkgs.rustPlatform;
       in {
         packages.default = rustPlatform.buildRustPackage {
-          pname = "dotacat";
-          version = "0.3.1-fast";
+          pname = "dotacat-fast";
+          version = "0.4";
 
           src = pkgs.fetchFromGitHub {
-            owner = "yourname";
-            repo = "dotacat";
-            rev = "your-latest-commit-sha";
-            hash = "sha256-...";
+            owner = "daveman1010221";
+            repo = "dotacat-fast";
+            rev = "fb68de584031f4fb5fec9e3e7d6e116f984ba098";
+            hash = "sha256-0000000000000000000000000000000000000000000000000000";
           };
 
-          cargoHash = "sha256-...";
+          cargoHash = "sha256-0000000000000000000000000000000000000000000000000000";
           useFetchCargoVendor = true;
 
           meta = with pkgs.lib; {
