@@ -12,24 +12,22 @@
       in {
         packages.default = rustPlatform.buildRustPackage {
           pname = "dotacat-fast";
-          version = "0.4";
+          version = "0.4.0";
 
-          src = pkgs.fetchFromGitHub {
-            owner = "daveman1010221";
-            repo = "dotacat-fast";
-            rev = "10735dadf60ee13157ff2a7c00cdf04eaae28b89";
-            hash = "sha256-x/EqLrhddyaS7NeENoO6xvcJbpdlgZQ1OogKOqo+Tjo=";
-          };
+          src = self;
 
-          cargoHash = "sha256-zA5VnMj+iyRas9dYVb5NwlPgMUNKSRwnlpK3zp5i+ls=";
-
-          useFetchCargoVendor = true;
+          cargoLock.lockFile = ./Cargo.lock;
 
           meta = with pkgs.lib; {
             description = "Fast ANSI-colored cat, like lolcat, but faster";
             license = licenses.mit;
             mainProgram = "dotacat";
           };
+        };
+
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [ self.packages.${system}.default ];
+          packages = [ pkgs.cargo pkgs.rustc pkgs.rust-analyzer pkgs.clippy ];
         };
       });
 }
