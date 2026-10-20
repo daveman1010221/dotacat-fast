@@ -23,18 +23,19 @@ pub fn print_rainbow(
     while i < bytes.len() {
         if bytes[i] == 0x1B {
             // Start of ANSI escape sequence
-            let mut esc_seq = String::with_capacity(32);
-            esc_seq.push('\x1B');
+            // Bytes, not chars: a byte of the sequence is copied as it is.
+            let mut esc_seq: Vec<u8> = Vec::with_capacity(32);
+            esc_seq.push(0x1B);
 
             i += 1;
             if i < bytes.len() && bytes[i] == b'[' {
-                esc_seq.push('[');
+                esc_seq.push(b'[');
                 i += 1;
 
                 // Read until final byte
                 while i < bytes.len() {
                     let b = bytes[i];
-                    esc_seq.push(b as char);
+                    esc_seq.push(b);
                     i += 1;
                     if (b as char).is_ascii_alphabetic() || (b'@'..=b'~').contains(&b) {
                         break;
@@ -44,7 +45,7 @@ pub fn print_rainbow(
                 // Non-CSI escape (e.g., ESC P, ESC ]), copy until ~
                 while i < bytes.len() {
                     let b = bytes[i];
-                    esc_seq.push(b as char);
+                    esc_seq.push(b);
                     i += 1;
                     if (b as char).is_ascii_graphic() || b == b'\x1B' {
                         break;
@@ -52,10 +53,11 @@ pub fn print_rainbow(
                 }
             }
 
-            out.write_all(esc_seq.as_bytes())?;
+            out.write_all(&esc_seq)?;
         } else {
-            // Normal printable byte
-            let ch = bytes[i] as char;
+            // A character, which in UTF-8 may be several bytes: taking each byte as a char would print `·` (C2 B7) as `Â·`.
+            // An escape sequence ends on an ASCII byte, so `i` is on a character boundary here.
+            let ch = line[i..].chars().next().unwrap_or('\u{FFFD}');
             let (r, g, b) = rainbow(freq, seed + index as f64 / spread);
 
             if invert {
@@ -65,7 +67,7 @@ pub fn print_rainbow(
             }
 
             index += 1;
-            i += 1;
+            i += ch.len_utf8();
         }
     }
     out.flush()?;
